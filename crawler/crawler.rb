@@ -13,7 +13,11 @@ class Crawler
     links_to_scrape[0..-2].each do |link|
       self.current_url = link
       p self.current_url
-      self.scrape
+      begin
+        self.scrape
+      rescue
+        next
+      end
     end
     self.link_bucket.uniq!
     File.open("links", "w+") do |f|
