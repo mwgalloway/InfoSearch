@@ -24,6 +24,10 @@ require 'erb'
 require 'rest-client'
 require 'nokogiri'
 
+require 'webrobots'
+require 'net/http'
+require_relative '../crawler/crawler.rb'
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
