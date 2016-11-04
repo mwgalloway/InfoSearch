@@ -1,12 +1,18 @@
 <h2>Infoseek</h2>
 
 
-<form id="search-bar">
+<form id="search-bar" action="/pages/search">
   <label>Search</label>
   <input type="text" name="search_input">
   <input type="submit">
 </form>
 
-<% @results.each do |result| %>
-  <%= erb :"_results", layout: false %>
-<% end  %>
+
+<% if @results %>
+  <% @results.each do |result| %>
+    <h4 class="result_title"><a href=""><%= result.page.title %></a></h4>
+    <p class="url"><%= result.page.url %></p>
+  <% end  %>
+<% else %>
+  <p>WAhhh wahhhh wahhhhhh</p>
+<% end %>
