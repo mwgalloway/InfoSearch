@@ -13,6 +13,10 @@ gem 'activerecord', '~>4.2.0'
 gem 'rake'
 gem 'faker'
 gem 'nokogiri'
+gem 'rest-client'
+gem 'mime-types'
+gem 'netrc'
+gem 'http-cookie'
 
 gem 'shotgun'
 
