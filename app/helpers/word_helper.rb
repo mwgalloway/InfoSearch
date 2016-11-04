@@ -16,13 +16,24 @@ module WordHelper
         string.split(" ").each do |word|
           word = word.downcase
           if !words.include?(word)
-            words << word
+            words << Word.find_or_create_by(text: word)
           end
         end
       end
     end
 
     words
+  end
+
+  def self.text_splitter(nokogiri_obj)
+    tag_content= []
+    tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'a']
+
+    tags.each do |tag|
+      tag_content << nokogiri_obj.css(tag).map { |p| p.inner_text.downcase }
+    end
+    p tag_content
+    tag_content.flatten.join(" ").split(" ")
   end
 
   def self.create_words(words_array)
@@ -32,6 +43,7 @@ module WordHelper
       new_word.save
       words << new_word
     end
+
     words
   end
 end
