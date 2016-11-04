@@ -4,14 +4,20 @@ class Crawler
     @links_to_scrape = []
     File.foreach("links") {|link| self.links_to_scrape << link.chomp}
     @link_bucket = []
+
     self.scrape_all
+
   end
 
   def scrape_all
     links_to_scrape[0..-2].each do |link|
       self.current_url = link
       p self.current_url
-      self.scrape
+      begin
+        self.scrape
+      rescue
+        next
+      end
     end
     self.link_bucket.uniq!
     File.open("links", "w+") do |f|
@@ -41,9 +47,10 @@ class Crawler
   def parse_links(noko_doc)
     parent_directory = self.current_url[0..self.current_url.rindex("/")]
     links = noko_doc.css('a').map{ |link| link ["href"] }
-    p links
     links.map!{ |link| concat_relative(parent_directory, link) }
-    self.link_bucket += links
+    links.uniq!
+    robot = WebRobots.new('MyBot/1.0')
+    self.link_bucket += links.reject{|link| robot.disallowed?(link) }
   end
 
 end

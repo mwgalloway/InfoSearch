@@ -19,6 +19,8 @@ gem 'netrc'
 gem 'http-cookie'
 
 gem 'shotgun'
+gem 'webrobots'
+
 
 group :test do
   gem 'shoulda-matchers'
