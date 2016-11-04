@@ -12,7 +12,6 @@ module WordHelper
     words = []
 
     tag_content.each do |tag_array|
-      p tag_array
       tag_array.each do |string|
         string.split(" ").each do |word|
           word = word.downcase
