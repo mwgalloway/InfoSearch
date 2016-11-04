@@ -1,27 +1,24 @@
-require_relative 'webpage_fetcher'
 require_relative '../models/word'
-
-nokogiri_obj = WebpageFetcher.parse("http://www.w3schools.com/html/html_basic.asp")
 
 module WordHelper
   def self.nokogiri_to_words(nokogiri_obj)
-    tag_content = nokogiri_obj.css('h1').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('h2').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('h3').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('h4').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('h5').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('h6').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('p').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('li').map {|p| p.inner_text }
-    tag_content += nokogiri_obj.css('a').map {|p| p.inner_text }
+    tag_content= []
+    tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'a']
+
+    tags.each do |tag|
+      tag_content << nokogiri_obj.css(tag).map { |p| p.inner_text }
+    end
 
     words = []
 
-    tag_content.each do |content|
-      content.split(" ").each do |word|
-        word = word.downcase
-        if !words.include?(word)
-          words << word
+    tag_content.each do |tag_array|
+      p tag_array
+      tag_array.each do |string|
+        string.split(" ").each do |word|
+          word = word.downcase
+          if !words.include?(word)
+            words << word
+          end
         end
       end
     end
@@ -39,8 +36,4 @@ module WordHelper
     words
   end
 end
-
-words_array = WordHelper.nokogiri_to_words(nokogiri_obj)
-words_obj = WordHelper.create_words(words_array)
-p words_obj
 

@@ -11,5 +11,3 @@ module WebpageFetcher
     nokogiri_document = Nokogiri.parse(response.body)
   end
 end
-
-# helpers WebpageFetcher
