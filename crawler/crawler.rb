@@ -4,11 +4,17 @@ class Crawler
     @links_to_scrape = []
     File.foreach("links") {|link| self.links_to_scrape << link}
     @link_bucket = []
+    @url = ''
   end
 
-  def scrape(url)
+  def scrape
+    get_response = RestClient.get(self.url)
     noko_doc = Nokogiri::HTML(get_response.to_s)
     parse_links(noko_doc, url)
+  end
+
+  def url_relative?
+    !self.url.match(/^https?:\/\//i)
   end
 
   def parse_links(noko_doc, url)
