@@ -17,6 +17,7 @@ gem 'rest-client'
 gem 'mime-types'
 gem 'netrc'
 gem 'http-cookie'
+gem 'openssl'
 
 gem 'shotgun'
 

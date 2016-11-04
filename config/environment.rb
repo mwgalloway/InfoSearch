@@ -20,6 +20,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 
 require 'erb'
+require 'openssl'
 
 require 'rest-client'
 require 'nokogiri'

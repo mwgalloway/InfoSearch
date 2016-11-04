@@ -16,7 +16,7 @@ module WordHelper
         string.split(" ").each do |word|
           word = word.downcase
           if !words.include?(word)
-            words << Word.find_by(text: word).first_or_create
+            words << Word.find_or_create_by(text: word)
           end
         end
       end
@@ -30,7 +30,7 @@ module WordHelper
     tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'a']
 
     tags.each do |tag|
-      tag_content << nokogiri_obj.css(tag).map { |p| p.inner_text }
+      tag_content << nokogiri_obj.css(tag).map { |p| p.inner_text.downcase }
     end
     p tag_content
     tag_content.flatten.join(" ").split(" ")
