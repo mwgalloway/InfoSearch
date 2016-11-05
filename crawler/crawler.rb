@@ -28,7 +28,11 @@ class Crawler
   def scrape
     get_response = RestClient.get(self.current_url)
     noko_doc = Nokogiri::HTML(get_response.to_s)
-    parse_links(noko_doc)
+    page_result = Page.add_to_index(url: self.current_url, noko_doc: noko_doc)
+    p page_result
+    if page_result
+      parse_links(noko_doc)
+    end
   end
 
   def url_relative?(url)
