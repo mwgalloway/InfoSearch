@@ -4,20 +4,16 @@ class Crawler
     @links_to_scrape = []
     File.foreach("links") {|link| self.links_to_scrape << link.chomp}
     @link_bucket = []
-
     self.scrape_all
-
   end
 
   def scrape_all
-    links_to_scrape[0..-2].each do |link|
+    links_to_scrape.each do |link|
       self.current_url = link
-      p self.current_url
-      begin
-        self.scrape
-      rescue
-        next
+      if self.current_url == ""
+        self.current_url = "http://www.warnerbros.com/archive/spacejam/movie/jam.htm"
       end
+      self.scrape
     end
     self.link_bucket.uniq!
     File.open("links", "w+") do |f|
@@ -26,10 +22,13 @@ class Crawler
   end
 
   def scrape
-    get_response = RestClient.get(self.current_url)
+    p "!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    begin
+      get_response = RestClient.get(self.current_url)
+    rescue
+    end
     noko_doc = Nokogiri::HTML(get_response.to_s)
     page_result = Page.add_to_index(url: self.current_url, noko_doc: noko_doc)
-    p page_result
     if page_result
       parse_links(noko_doc)
     end
@@ -40,6 +39,7 @@ class Crawler
   end
 
   def concat_relative(parent, link)
+    return "http://www.warnerbros.com/archive/spacejam/movie/jam.htm" if link.nil?
     return link unless url_relative?(link)
     if link[0] == "/"
       parent + link[1..-1]

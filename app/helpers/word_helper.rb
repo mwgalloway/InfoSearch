@@ -13,7 +13,10 @@ module WordHelper
 
     tag_content.each do |tag_array|
       tag_array.each do |string|
-        string.split(" ").each do |word|
+        words_array = string.split(" ")
+        words_array.uniq!
+        words_array = words_array[0..280]
+        words_array.each do |word|
           word = word.downcase
           if !words.include?(word)
             words << Word.find_or_create_by(text: word)
