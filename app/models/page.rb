@@ -19,7 +19,6 @@ class Page < ActiveRecord::Base
     self.title = nokogiri_obj.css("title").text
     self.save
     words_to_measure.each do |word_to_measure|
-      p word_to_measure
       if full_text.index(word_to_measure.text)
         position = full_text.index(word_to_measure.text) + 1
         frequency = full_text.select{ |text_word| text_word == word_to_measure.text }.count
