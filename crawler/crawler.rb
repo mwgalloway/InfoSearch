@@ -22,7 +22,6 @@ class Crawler
   end
 
   def scrape
-    p "!!!!!!!!!!!!!!!!!!!!!!!!!!"
     begin
       get_response = RestClient.get(self.current_url)
     rescue
