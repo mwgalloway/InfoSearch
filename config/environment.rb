@@ -20,7 +20,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 
 require 'erb'
-require 'resque'
+require 'openssl'
 
 require 'rest-client'
 require 'nokogiri'
@@ -28,7 +28,6 @@ require 'nokogiri'
 require 'webrobots'
 require 'net/http'
 require_relative '../crawler/crawler.rb'
-require_relative '../app/jobs/sleeper.rb'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))

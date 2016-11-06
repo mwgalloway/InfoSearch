@@ -1,5 +1,4 @@
 require 'rake'
-require 'resque/tasks'
 
 require ::File.expand_path('../config/environment', __FILE__)
 
