@@ -8,7 +8,7 @@
 </form>
 
 
-<% if @results %>
+<% if @results != [] %>
   <% @results.each do |result| %>
     <h4 class="result_title"><a href=""><%= result[:object].page.title %></a></h4>
     <p class="url"><%= result[:object].page.url %>
