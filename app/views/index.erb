@@ -3,16 +3,17 @@
 
 <form id="search-bar" action="/pages/search">
   <label>Search</label>
-  <input type="text" name="search_input">
+  <input type="text" name="search_input" value="<%=params[:search_input]%>">
   <input type="submit">
 </form>
 
-
-<% if @results %>
+<% if @results != [] %>
   <% @results.each do |result| %>
-    <h4 class="result_title"><a href=""><%= result.page.title %></a></h4>
-    <p class="url"><%= result.page.url %></p>
+    <h4 class="result_title"><a href=""><%= result[:object].page.title %></a></h4>
+    <p class="url"><%= result[:object].page.url %>
+    </p>
+    <h4>rank: <%= result[:ranking] %></h4>
   <% end  %>
-<% else %>
-  <p>WAhhh wahhhh wahhhhhh</p>
+<% elsif @error %>
+  <h3><%= @error[0] %></h3>
 <% end %>
