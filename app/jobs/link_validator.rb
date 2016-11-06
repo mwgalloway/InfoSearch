@@ -11,7 +11,7 @@ class LinkValidator
   end
 
   def self.link_valid?
-    forbidden = [".pdf", ".doc", ".js", ".css", ".xls", ".ppt", ".mp3", ".m4v", ".avi", ".mpg", ".rss", ".xml", ".json", ".txt", ".git", ".zip", ".md5", ".asc", ".jpg", ".gif", ".png", "/api", "/cgi-bin", ".php", "/php"]
+    forbidden = [".pdf", ".doc", ".js", ".css", ".xls", ".ppt", ".mp3", ".m4v", ".avi", ".mpg", ".rss", ".xml", ".json", ".txt", ".git", ".zip", ".md5", ".asc", ".jpg", ".gif", ".png", "/api", "/cgi-bin", ".php", "/php", "facebook.com", "twitter.com"]
     results = forbidden.any?{|validation| link.include?(validation)}
     results.empty?
   end

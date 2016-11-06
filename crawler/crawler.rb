@@ -33,19 +33,6 @@ class Crawler
     end
   end
 
-  # def url_relative?(url)
-  #   !url.index(/^https?:\/\//i)
-  # end
-
-  # def concat_relative(parent, link)
-  #   return link unless url_relative?(link)
-  #   if link[0] == "/"
-  #     parent + link[1..-1]
-  #   else
-  #     parent + link
-  #   end
-  # end
-
   def parse_links(noko_doc)
     parent_directory = self.current_url[0..self.current_url.rindex("/")]
     links = noko_doc.css('a').map{ |link| link ["href"] }
