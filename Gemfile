@@ -22,6 +22,8 @@ gem 'openssl'
 gem 'shotgun'
 gem 'webrobots'
 
+gem 'resque'
+
 
 group :test do
   gem 'shoulda-matchers'
