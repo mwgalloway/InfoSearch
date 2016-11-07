@@ -1,6 +1,7 @@
 require 'uri'
 require 'net/http'
 class Crawler
+  include Resque::Plugins::UniqueJob
   @queue = :crawl
 
   def self.perform(page_url)
