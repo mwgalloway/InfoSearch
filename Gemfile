@@ -23,6 +23,10 @@ gem 'resque-loner'
 gem 'shotgun'
 gem 'webrobots'
 
+gem 'mongo'
+gem 'mongoid'
+gem 'bson_ext'
+
 gem 'pry'
 
 

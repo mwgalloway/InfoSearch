@@ -16,6 +16,8 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     backports (3.6.6)
+    bson (4.1.1)
+    bson_ext (1.5.1)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -39,11 +41,19 @@ GEM
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.8.0)
+    mongo (2.3.1)
+      bson (~> 4.1)
+    mongoid (5.1.5)
+      activemodel (~> 4.0)
+      mongo (~> 2.1)
+      origin (~> 2.2)
+      tzinfo (>= 0.3.37)
     mono_logger (1.1.0)
     multi_json (1.11.2)
     netrc (0.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    origin (2.2.2)
     pg (0.18.2)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -123,11 +133,14 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 4.2.0)
   activesupport (~> 4.2.0)
+  bson_ext
   capybara
   factory_girl
   faker (~> 1.6.6)
   http-cookie
   mime-types
+  mongo
+  mongoid
   netrc
   nokogiri
   pg
