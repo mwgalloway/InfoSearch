@@ -7,6 +7,7 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Require gems we care about
 require 'rubygems'
+require 'mongoid'
 
 require 'uri'
 require 'pathname'
@@ -37,18 +38,14 @@ require 'net/http'
 require_relative '../app/jobs/link_validator.rb'
 require_relative '../app/jobs/crawler.rb'
 
-
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
 
-configure do
-  # By default, Sinatra assumes that the root is the file that calls the configure block.
-  # Since this is not the case for us, we set it manually.
-  db = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'test')
-  set :mongo_db, db[:test]
+Mongoid.load!("config/mongoid.yml")
 
+configure do
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions

@@ -4,7 +4,6 @@ class Crawler
   @queue = :crawl
 
   def self.perform(page_url)
-    p page_url
     uri = URI.parse(page_url)
     response = Net::HTTP.get_response(uri)
     noko_doc = Nokogiri::HTML(response.body)
