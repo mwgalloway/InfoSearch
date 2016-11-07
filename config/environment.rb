@@ -31,10 +31,9 @@ require 'nokogiri'
 
 require 'webrobots'
 require 'net/http'
-# require_relative '../crawler/crawler.rb'
+
 require_relative '../app/jobs/link_validator.rb'
 require_relative '../app/jobs/crawler.rb'
-require_relative '../app/jobs/indexer.rb'
 
 
 # Some helper constants for path-centric logic

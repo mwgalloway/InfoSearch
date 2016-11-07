@@ -3,10 +3,13 @@ require 'uri'
 class LinkValidator
 
   @queue = :validate
+  @@robot = WebRobots.new('InfoBot/1.0')
 
   def self.perform(link)
     raise "link cannot be nil" if link.nil?
     raise "link is not valid" unless link_valid?(link)
+    raise "disallowed on robots.txt" if @@robot.disallowed?(link)
+    raise "already in db" if Page.find_by(url: link)
     p "#{link} is valid"
 
     Resque.enqueue(Crawler, link)
