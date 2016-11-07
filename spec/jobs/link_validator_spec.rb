@@ -8,7 +8,7 @@ describe "LinkValidator" do
 
   it "adds a valid link to the crawler queue" do
     Resque.enqueue(LinkValidator, "http://www.spacejam.com")
-    expect(Resque).to have_queued("http://www.spacejam.com", :crawler)
+    expect(Resque).to have_queued("http://www.spacejam.com", :scrape)
   end
 
   it "Returns false if its an absolute URL" do

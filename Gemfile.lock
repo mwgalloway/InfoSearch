@@ -124,6 +124,7 @@ DEPENDENCIES
   pg
   rack-test
   rake
+  resque
   resque_spec
   rest-client
   rspec (~> 3.0)
