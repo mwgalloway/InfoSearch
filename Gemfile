@@ -22,6 +22,9 @@ gem 'resque'
 gem 'shotgun'
 gem 'webrobots'
 
+gem 'mongo'
+gem 'bson_ext'
+
 gem 'pry'
 
 

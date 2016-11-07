@@ -28,6 +28,8 @@ require 'pry'
 require 'rest-client'
 require 'nokogiri'
 
+require 'mongo'
+require 'json/ext'
 
 require 'webrobots'
 require 'net/http'
@@ -44,6 +46,9 @@ APP_NAME = APP_ROOT.basename.to_s
 configure do
   # By default, Sinatra assumes that the root is the file that calls the configure block.
   # Since this is not the case for us, we set it manually.
+  db = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'test')
+  set :mongo_db, db[:test]
+
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
