@@ -22,6 +22,8 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'resque'
 
+require 'pry'
+
 
 require 'rest-client'
 require 'nokogiri'
@@ -29,7 +31,7 @@ require 'nokogiri'
 
 require 'webrobots'
 require 'net/http'
-# require_relative '../crawler/crawler.rb'
+
 require_relative '../app/jobs/link_validator.rb'
 require_relative '../app/jobs/crawler.rb'
 

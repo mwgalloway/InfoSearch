@@ -22,6 +22,8 @@ gem 'resque'
 gem 'shotgun'
 gem 'webrobots'
 
+gem 'pry'
+
 
 group :test do
   gem 'shoulda-matchers'
