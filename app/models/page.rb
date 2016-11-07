@@ -1,3 +1,4 @@
+require 'pry'
 class Page < ActiveRecord::Base
   validates :url, presence: true
   validates :url, uniqueness: true

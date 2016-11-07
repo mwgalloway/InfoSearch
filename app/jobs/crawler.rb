@@ -8,6 +8,8 @@ class Crawler
     uri = URI.parse(page_url)
     response = Net::HTTP.get_response(uri)
     noko_doc = Nokogiri::HTML(response.body)
+    Page.add_to_index({url: page_url, noko_doc: noko_doc})
+    # Resque.enqueue(Indexer, {page_url: page_url, noko_doc: noko_doc)
     links = self.scrape_links(noko_doc)
     joined_links = self.join_relative(page_url, links)
     validate_links(joined_links)

@@ -8,6 +8,7 @@ class LinkValidator
     raise "link cannot be nil" if link.nil?
     raise "link is not valid" unless link_valid?(link)
     p "#{link} is valid"
+
     Resque.enqueue(Crawler, link)
   end
 
