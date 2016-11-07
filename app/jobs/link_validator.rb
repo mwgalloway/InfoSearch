@@ -1,7 +1,7 @@
 require 'uri'
 
 class LinkValidator
-
+  include Resque::Plugins::UniqueJob
   @queue = :validate
   @@robot = WebRobots.new('InfoBot/1.0')
 

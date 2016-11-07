@@ -31,6 +31,7 @@ require 'nokogiri'
 
 require 'webrobots'
 require 'net/http'
+require 'resque-loner'
 
 require_relative '../app/jobs/link_validator.rb'
 require_relative '../app/jobs/crawler.rb'

@@ -18,6 +18,7 @@ gem 'mime-types'
 gem 'netrc'
 gem 'http-cookie'
 gem 'resque'
+gem 'resque-loner'
 
 gem 'shotgun'
 gem 'webrobots'
