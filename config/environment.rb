@@ -17,17 +17,22 @@ require 'logger'
 require 'faker'
 
 require 'sinatra'
-require "sinatra/reloader" if development?
+require 'sinatra/reloader' if development?
 
 require 'erb'
-require 'openssl'
+require 'resque'
+
 
 require 'rest-client'
 require 'nokogiri'
 
+
 require 'webrobots'
 require 'net/http'
-require_relative '../crawler/crawler.rb'
+# require_relative '../crawler/crawler.rb'
+require_relative '../app/jobs/link_validator.rb'
+require_relative '../app/jobs/crawler.rb'
+
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))

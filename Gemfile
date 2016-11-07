@@ -17,7 +17,7 @@ gem 'rest-client'
 gem 'mime-types'
 gem 'netrc'
 gem 'http-cookie'
-gem 'openssl'
+gem 'resque'
 
 gem 'shotgun'
 gem 'webrobots'
@@ -28,6 +28,7 @@ group :test do
   gem 'rack-test'
   gem 'rspec', '~>3.0'
   gem 'capybara'
+  gem 'resque_spec'
 end
 
 group :test, :development do
