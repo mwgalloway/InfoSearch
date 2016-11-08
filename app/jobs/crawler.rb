@@ -8,17 +8,20 @@ class Crawler
     response = Net::HTTP.get_response(uri)
     noko_doc = Nokogiri::HTML(response.body)
     links = self.scrape_links(noko_doc)
-    links = links.reject { |link| link.nil? }
-    links = links.reject {|link| link.include?("javascript")}
+    links.reject! { |link| link.nil? || link.include?("javascript")}
+    external_links = Crawler.filter_external_links(links)
+    Page.add_to_index({url: page_url, noko_doc: noko_doc, external_links: external_links})
+    joined_links = self.join_relative(page_url, links)
+    validate_links(joined_links)
+  end
+
+  def self.filter_external_links(links)
     absolute_links = links.select{ |link| link.include?("http")}
     host = uri.host.downcase
     if host.include?("www.")
       host = host[4..-1]
     end
     external_links = absolute_links.reject{ |link| link.include?(host)}
-    Page.add_to_index({url: page_url, noko_doc: noko_doc, external_links: external_links})
-    joined_links = self.join_relative(page_url, links)
-    validate_links(joined_links)
   end
 
   def self.scrape_links(noko_doc)
