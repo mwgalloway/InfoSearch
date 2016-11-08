@@ -23,10 +23,10 @@ class Page
     self.save
   end
 
-  def self.search(query)
+  def self.search(query, skip)
     Page.collection.
       find({"$text" => {"$search" => query}}).
       projection(text: 1, url: 2, title: 3, score: {"$meta" => "textScore"}).
-      sort({score: {"$meta" => "textScore"}}).limit(10)
+      sort({score: {"$meta" => "textScore"}}).skip(skip).limit(10)
   end
 end
