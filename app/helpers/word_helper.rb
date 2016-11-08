@@ -36,7 +36,7 @@ module WordHelper
     tags.each do |tag|
       tag_content << nokogiri_obj.css(tag).map { |p| p.inner_text.downcase }
     end
-    tag_content.flatten.join(" ").split(" ")[0..299]
+    tag_content.flatten.join(" ").split(" ")[0..299].join(" ")
   end
 
   def self.create_words(words_array)
