@@ -9,10 +9,11 @@
 
 <% if @results != [] %>
   <% @results.each do |result| %>
-    <h4 class="result_title"><a href="<%= result.url %>"><%= result.title %></a></h4>
-    <p class="url"><%= result.url %>
+    <h4 class="result_title"><a href="<%= result[:url] %>"><%= result[:title] %></a></h4>
+    <p class="url"><%= result[:url] %>
     </p>
-    <p><%= result.text.truncate(100) %></p>
+    <p><%= result[:text].truncate(100) %></p>
+    <h4>rank: <%= result[:score] %></h4>
   <% end  %>
 <% elsif @error %>
   <h3><%= @error[0] %></h3>
