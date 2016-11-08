@@ -5,12 +5,13 @@ class Page
   field :url, type: String
   field :title, type: String
   field :text, type: String
+  field :external_links, type: Array
 
   validates_presence_of :url
   validates_uniqueness_of :url
 
   def self.add_to_index(args)
-    new_page = Page.new(url: args[:url])
+    new_page = Page.new(url: args[:url], external_links: args[:external_links])
     new_page.set_nokogiri(args[:noko_doc])
     new_page.save
   end
