@@ -22,4 +22,8 @@ class Page
     self.text = full_text
     self.save
   end
+
+  def self.search(q)
+    Page.where({ :$text => { :$search => q }}).limit(10)
+  end
 end

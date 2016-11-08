@@ -5,11 +5,12 @@ get '/pages' do
 end
 
 get '/pages/search' do
-  queries = get_individual_queries(params[:search_input])
-
-  if queries != []
-    @results = get_results(queries).sort { |a,b| b[:ranking] <=> a[:ranking] }
-  else
+  # queries = get_individual_queries(params[:search_input])
+  @results = Page.search(params[:search_input])
+  @results.each {|result| p result.url}
+  p "+++++++++++++++++++++++++++++++++++++++++++++++"
+  p @results
+  if @results.length == 0
     @results = []
     @error = ["We could not find anything that met your search terms"]
   end
