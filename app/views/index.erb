@@ -1,20 +1,38 @@
 <h2>Infoseek</h2>
 
 
-<form id="search-bar" action="/pages/search">
+<form id="search-bar" action="/pages/search/1">
   <label>Search</label>
   <input type="text" name="search_input" value="<%=params[:search_input]%>">
   <input type="submit">
 </form>
+<% if @benchmark %>
+  <h5><% if @results_count > 0 %>About <%= @results_count %> results <% end %>(<%= @benchmark.round(4) %> seconds)</h5>
+<% end %>
+<br />
 
 <% if @results != [] %>
   <% @results.each do |result| %>
     <h4 class="result_title"><a href="<%= result[:url] %>"><%= result[:title] %></a></h4>
+    <h4>rank: <%= result[:score].round(5) %></h4>
     <p class="url"><%= result[:url] %>
     </p>
     <p><%= result[:text].truncate(100) %></p>
-    <h4>rank: <%= result[:score] %></h4>
+    <hr>
   <% end  %>
 <% elsif @error %>
   <h3><%= @error[0] %></h3>
 <% end %>
+<% if @current_page > 1 %>
+<form style="display: inline;" action="/pages/search/<%= @current_page - 1 %>" method="get">
+  <input type="hidden" name="previous">
+  <input type="hidden" name="search_input" value="<%=params[:search_input]%>">
+  <input type="submit" value="Previous Page">
+</form>
+<% end %>
+<form style="display: inline;" action="/pages/search/<%= @current_page + 1 %>" method="get">
+  <input type="hidden" name="next">
+  <input type="hidden" name="search_input" value="<%=params[:search_input]%>">
+  <input type="submit" value="Next Page">
+</form>
+<br />
