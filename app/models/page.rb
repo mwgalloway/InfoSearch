@@ -22,4 +22,11 @@ class Page
     self.text = full_text
     self.save
   end
+
+  def self.search(query)
+    Page.collection.
+      find({"$text" => {"$search" => query}}).
+      projection(text: 1, url: 2, title: 3, score: {"$meta" => "textScore"}).
+      sort({score: {"$meta" => "textScore"}}).limit(10)
+  end
 end

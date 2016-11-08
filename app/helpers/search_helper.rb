@@ -1,17 +1,17 @@
 module SearchHelper
 
-  def get_individual_queries(params)
-    query_words_array = []
-    input_params = params.split(" ")
-    input_params.each do |param|
-      found_word = Word.find_by(text: param)
+  # def get_individual_queries(params)
+  #   query_words_array = []
+  #   input_params = params.split(" ")
+  #   input_params.each do |param|
+  #     found_word = Word.find_by(text: param)
 
-      if found_word
-        query_words_array << found_word
-      end
-    end
-    query_words_array
-  end
+  #     if found_word
+  #       query_words_array << found_word
+  #     end
+  #   end
+  #   query_words_array
+  # end
 
   def get_results(query_words_array)
     if query_words_array != []
