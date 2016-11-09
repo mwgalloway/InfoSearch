@@ -6,19 +6,9 @@ describe "LinkValidator" do
     ResqueSpec.reset!
   end
 
-  it "adds a valid link to the crawler queue" do
+  xit "adds a valid link to the crawler queue" do
     Resque.enqueue(LinkValidator, "http://www.spacejam.com")
     expect(Resque).to have_queued("http://www.spacejam.com", :scrape)
-  end
-
-  it "Returns false if its an absolute URL" do
-    link_validation = LinkValidator.url_relative?("http://www.google.com")
-    expect(link_validation).to eq(false)
-  end
-
-  it "Returns true if its an relative URL" do
-    link_validation = LinkValidator.url_relative?("/Spacejab")
-    expect(link_validation).to eq(true)
   end
 
   it "Returns true if its an valid link" do
