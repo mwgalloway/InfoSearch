@@ -1,0 +1,6 @@
+development:
+  clients:
+    default:
+      database: test
+      hosts:
+        - <%= ENV['MONGOID_DB'] %>

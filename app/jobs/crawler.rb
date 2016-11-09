@@ -1,17 +1,28 @@
 require 'uri'
 require 'net/http'
 class Crawler
+  include Resque::Plugins::UniqueJob
   @queue = :crawl
 
   def self.perform(page_url)
-    p page_url
     uri = URI.parse(page_url)
     response = Net::HTTP.get_response(uri)
     noko_doc = Nokogiri::HTML(response.body)
-    Page.add_to_index({url: page_url, noko_doc: noko_doc})
     links = self.scrape_links(noko_doc)
+    links.reject! { |link| link.nil? || link.include?("javascript")}
+    external_links = Crawler.external_links(links, uri)
+    Page.add_to_index({url: page_url, noko_doc: noko_doc, external_links: external_links})
     joined_links = self.join_relative(page_url, links)
     validate_links(joined_links)
+  end
+
+  def self.external_links(links, uri)
+    absolute_links = links.select{ |link| link.include?("http")}
+    host = uri.host.downcase
+    if host.include?("www.")
+      host = host[4..-1]
+    end
+    external_links = absolute_links.reject{ |link| link.include?(host)}
   end
 
   def self.scrape_links(noko_doc)
@@ -27,6 +38,7 @@ class Crawler
 
   def self.join_relative(page_url, links)
     links.map do |link|
+      p link
       URI.join(page_url, link).to_s
     end
   end
