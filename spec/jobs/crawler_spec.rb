@@ -1,16 +1,23 @@
-# require_relative '../spec_helper'
+require_relative '../spec_helper'
+require 'uri'
+require 'net/http'
 
+describe "Crawler" do
+  let(:uri) {URI.parse("https://kylepdorsey.github.io/test1")}
+  let(:response) {Net::HTTP.get_response(uri)}
+  let(:noko_doc) {Nokogiri::HTML(response.body)}
 
-# describe "LinkValidator" do
-#   let(:crawler) {Crawler.new()}
-#   let(:test_url) {"https://kylepdorsey.github.io/test1.html"}
+  it "Has a method scrape_links that returns an Array of links" do
+    expect(Crawler.scrape_links(noko_doc)[0]).to eq("/test2.html")
+  end
 
-#   after(:each) do
-#     Page.destroy_all({:url => test_url})
-#   end
+  it "Has a method external_links that returns an Array of external links" do
+    links = Crawler.scrape_links(noko_doc)
+    expect(Crawler.external_links(links, uri)[0]).to eq("https://google.com")
+  end
 
-#   it "Creates a new Page record related to the input URL" do
-#     crawler.perform(test_url)
-#     expect(Page.find_by(url: test_url)).to be_an_instance_of(Page.class)
-#   end
-# end
+  it "Returns an Array of relative links joined with the root url" do
+    links = Crawler.scrape_links(noko_doc)
+    expect(Crawler.join_relative(uri, links)[0]).to eq("https://kylepdorsey.github.io/test2.html")
+  end
+end
