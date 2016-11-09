@@ -13,6 +13,9 @@ require 'benchmark'
 require 'uri'
 require 'pathname'
 
+require 'dotenv'
+Dotenv.load
+
 require 'pg'
 require 'active_record'
 require 'logger'
@@ -44,6 +47,7 @@ require_relative '../app/jobs/crawler.rb'
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
+
 
 Mongoid.load!("config/mongoid.yml")
 
