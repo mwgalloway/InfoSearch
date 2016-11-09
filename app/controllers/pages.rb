@@ -1,5 +1,5 @@
 get '/pages' do
-  @pages = Page.all
+#  @pages = Page.all
   @results = []
   erb :'index'
 end
