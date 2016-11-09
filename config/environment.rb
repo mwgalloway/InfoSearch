@@ -16,7 +16,6 @@ require 'pathname'
 require 'dotenv'
 Dotenv.load
 
-require 'pg'
 require 'active_record'
 require 'logger'
 require 'faker'
