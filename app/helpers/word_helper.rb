@@ -1,4 +1,3 @@
-require_relative '../models/word'
 
 module WordHelper
   def self.nokogiri_to_words(nokogiri_obj)
@@ -23,9 +22,6 @@ module WordHelper
     puncuation_free_content = joined_content.split(" ")
 
     puncuation_free_content.uniq!
-    puncuation_free_content.each do |word|
-      words << Word.find_or_create_by(text: word)
-    end
     words
   end
 
@@ -37,17 +33,6 @@ module WordHelper
       tag_content << nokogiri_obj.css(tag).map { |p| p.inner_text.downcase }
     end
     tag_content.flatten.join(" ").split(" ")[0..299].join(" ")
-  end
-
-  def self.create_words(words_array)
-    words = []
-    words_array.each do |word|
-      new_word = Word.new(text: word)
-      new_word.save
-      words << new_word
-    end
-
-    words
   end
 end
 

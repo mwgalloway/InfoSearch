@@ -17,9 +17,7 @@ require 'dotenv'
 Dotenv.load
 
 require 'pg'
-require 'active_record'
 require 'logger'
-require 'faker'
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -27,10 +25,6 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'resque'
 
-require 'pry'
-
-
-require 'rest-client'
 require 'nokogiri'
 
 require 'mongo'
