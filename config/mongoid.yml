@@ -3,4 +3,4 @@ development:
     default:
       database: test
       hosts:
-        - <%= ENV['MONGOID_DB'] %>
+        - localhost:27017

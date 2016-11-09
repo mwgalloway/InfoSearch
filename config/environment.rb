@@ -66,4 +66,8 @@ Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
-require APP_ROOT.join('config', 'database')
+Dir[APP_ROOT.join('app', 'models', '*.rb')].each do |model_file|
+  filename = File.basename(model_file).gsub('.rb', '')
+  autoload ActiveSupport::Inflector.camelize(filename), model_file
+end
+# require APP_ROOT.join('config', 'database')
