@@ -16,10 +16,7 @@ require 'pathname'
 require 'dotenv'
 Dotenv.load
 
-require 'pg'
-require 'active_record'
 require 'logger'
-require 'faker'
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -27,10 +24,6 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'resque'
 
-require 'pry'
-
-
-require 'rest-client'
 require 'nokogiri'
 
 require 'mongo'
@@ -66,4 +59,8 @@ Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
-require APP_ROOT.join('config', 'database')
+Dir[APP_ROOT.join('app', 'models', '*.rb')].each do |model_file|
+  filename = File.basename(model_file).gsub('.rb', '')
+  autoload ActiveSupport::Inflector.camelize(filename), model_file
+end
+# require APP_ROOT.join('config', 'database')
