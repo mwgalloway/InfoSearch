@@ -1,6 +1,24 @@
+body {
+  background: #fdf6e3;
+}
+
 .container {
   width: 900px;
   margin: 0 auto;
+}
+
+footer {
+
+}
+
+.page-button input{
+  background: #033649;
+  padding: 10px;
+  border: none;
+  color: #fdf6e3;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 30px;
 }
 
 .results-container {
@@ -29,14 +47,15 @@
 }
 
 .relevancy {
-  font-weight: bold;
   padding-left: 20px;
+  color: #586e75;
+  font-size: 12pt;
 }
 
 h2 {
   font-family: 'Sanchez', serif;
-  font-size: 65px;
-  font-weight: bold;
+  font-size: 68px;
+  font-weight: 800;
   color: #333;
   margin-top: 100px;
   margin-bottom: 30px;
@@ -49,12 +68,13 @@ h5 {
 }
 
 #search-button {
-  border: 0;
-  background: #bbb;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
   padding: 4px;
-  margin-left: -4px;
+  margin-left: -46px;
+  margin-bottom: 1px;
   vertical-align: bottom;
-
 }
 
 #search-bar {
@@ -69,5 +89,23 @@ h5 {
   height: 42px;
   font-size: 25px;
   margin-right: 0;
-  vertical-align: bottom
+  border: solid 1px #93a1a1;
+  border-radius: 5px;
+  vertical-align: bottom;
+  padding-right: 44px;
 }
+
+h2 .char3{margin-right: -5px;}
+h2 .char9{margin-left: -1px;}
+
+h2 .char1{color: #542437;}
+h2 .char2{color: #033649;}
+h2 .char3{color: #542437;}
+h2 .char4{color: #033649;}
+h2 .char5{color: #542437;}
+h2 .char6{color: #033649;}
+h2 .char7{color: #542437;}
+h2 .char8{color: #033649;}
+h2 .char9{color: #542437;}
+h2 .char10{color: #033649;}
+
