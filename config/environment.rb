@@ -7,14 +7,16 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Require gems we care about
 require 'rubygems'
+require 'mongoid'
+require 'benchmark'
 
 require 'uri'
 require 'pathname'
 
-require 'pg'
-require 'active_record'
+require 'dotenv'
+Dotenv.load
+
 require 'logger'
-require 'faker'
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -22,28 +24,27 @@ require 'sinatra/reloader' if development?
 require 'erb'
 require 'resque'
 
-require 'pry'
-
-
-require 'rest-client'
 require 'nokogiri'
 
+require 'mongo'
+require 'json/ext'
 
 require 'webrobots'
 require 'net/http'
+require 'resque-loner'
 
 require_relative '../app/jobs/link_validator.rb'
 require_relative '../app/jobs/crawler.rb'
-
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
 
+
+Mongoid.load!("config/mongoid.yml")
+
 configure do
-  # By default, Sinatra assumes that the root is the file that calls the configure block.
-  # Since this is not the case for us, we set it manually.
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
@@ -58,4 +59,8 @@ Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
-require APP_ROOT.join('config', 'database')
+Dir[APP_ROOT.join('app', 'models', '*.rb')].each do |model_file|
+  filename = File.basename(model_file).gsub('.rb', '')
+  autoload ActiveSupport::Inflector.camelize(filename), model_file
+end
+# require APP_ROOT.join('config', 'database')
