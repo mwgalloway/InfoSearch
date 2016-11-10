@@ -46,7 +46,6 @@ Mongoid.load!("config/mongoid.yml")
 
 configure do
   set :root, APP_ROOT.to_path
-  set :port
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
   set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
