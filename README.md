@@ -10,7 +10,7 @@ and returns a collection of links sorted in order of relevancy.
 
 ## Dependencies
 
-InfoSearch is know to work with the following environment:
+InfoSearch is known to work with the following environment:
 
     Ruby 2.3.1
     MongoDB 3.2.1
